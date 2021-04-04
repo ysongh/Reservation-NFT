@@ -1,0 +1,12 @@
+{
+  "name": "reservation-nft",
+  "displayName": "reservation-nft",
+  "expo": {
+    "name": "reservation-nft",
+    "slug": "reservation-nft",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
