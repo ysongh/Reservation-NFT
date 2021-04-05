@@ -67,3 +67,4 @@ web-build/
 # Other
 yarn.lock
 package-lock.json
+.env
