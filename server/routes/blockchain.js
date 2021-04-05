@@ -31,4 +31,23 @@ router.get('/connect', async (req, res, next) => {
     }
 });
 
+// POST /api/blockchain/create-account
+// Creating a Celo account
+router.post('/create-account', async (req, res, next) => {
+    try{
+        // Create a connection to DataHub Celo Network node
+        const web3 = new Web3(process.env.REST_URL);
+
+        const account =  web3.eth.accounts.create();
+
+        return res.status(200).json({
+            'Address': account.address,
+            'PrivateKey': account.privateKey,
+            'Message': 'Created a Celo account'
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 module.exports = router;
