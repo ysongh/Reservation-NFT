@@ -40,7 +40,7 @@ router.post('/create-account', async (req, res, next) => {
 
         const account =  web3.eth.accounts.create();
 
-        return res.status(200).json({
+        return res.status(201).json({
             'Address': account.address,
             'PrivateKey': account.privateKey,
             'Message': 'Created a Celo account'
@@ -65,10 +65,40 @@ router.put('/getbalance', async (req, res, next) => {
             .catch((err) => { throw new Error(`Could not fetch account: ${err}`); });
 
         return res.status(200).json({
-            'CELO balance': accountBalances.CELO.toString(10),
-            'cUSD balance': accountBalances.cUSD.toString(10),
-            'Locked CELO balance': accountBalances.lockedCELO.toString(10),
-            'Pending balance': accountBalances.pending.toString(10)
+            'CELO_balance': accountBalances.CELO.toString(10),
+            'cUSD_balance': accountBalances.cUSD.toString(10),
+            'Locked_CELO_balance': accountBalances.lockedCELO.toString(10),
+            'Pending_balance': accountBalances.pending.toString(10)
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
+// PUT /api/blockchain/transfer-celo
+// Transfer CELO to other Celo account
+router.put('/transfer-celo', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+        const recipientAddress = req.body.recipientAddress;
+        const amount = req.body.amount;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        client.addAccount(account.privateKey);
+
+        const goldtoken = await client.contracts.getGoldToken();
+
+        const celotx = await goldtoken.transfer(recipientAddress, amount).send({from: account.address})
+            .catch((err) => { throw new Error(`Could not transfer CELO: ${err}`) });
+
+        const celoReceipt = await celotx.waitReceipt();
+
+        return res.status(200).json({
+            'CELO_Transaction_receipt': celoReceipt
         });
     } catch(err){
         console.error(err);
