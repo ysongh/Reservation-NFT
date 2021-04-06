@@ -50,4 +50,29 @@ router.post('/create-account', async (req, res, next) => {
     }
 });
 
+// PUT /api/blockchain/getbalance
+// Get balance of your Celo account
+router.put('/getbalance', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        const accountBalances = await client.getTotalBalance(account.address)
+            .catch((err) => { throw new Error(`Could not fetch account: ${err}`); });
+
+        return res.status(200).json({
+            'CELO balance': accountBalances.CELO.toString(10),
+            'cUSD balance': accountBalances.cUSD.toString(10),
+            'Locked CELO balance': accountBalances.lockedCELO.toString(10),
+            'Pending balance': accountBalances.pending.toString(10)
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 module.exports = router;
