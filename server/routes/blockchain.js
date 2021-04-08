@@ -143,4 +143,44 @@ router.put('/gettotalsupply', async (req, res, next) => {
     }
 });
 
+// POST /api/blockchain/mintnft
+// Mint NFT
+router.post('/mintnft', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+        const imageURL = req.body.imageURL;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        client.addAccount(account.privateKey);
+
+        const networkId = await web3.eth.net.getId();
+
+        const deployedNetwork = ReservationNFT.networks[networkId];
+
+        if (!deployedNetwork) {
+            throw new Error(`${networkId} is not valid`);
+        }
+
+        let instance = new web3.eth.Contract(
+            ReservationNFT.abi,
+            deployedNetwork.address
+        );
+
+        const txObject = await instance.methods.mintNFT(imageURL);
+        let tx = await client.sendTransactionObject(txObject, { from: account.address });
+
+        let receipt = await tx.waitReceipt();
+
+        return res.status(201).json({
+            Receipt: receipt
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 module.exports = router;
