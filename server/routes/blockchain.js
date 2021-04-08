@@ -3,6 +3,8 @@ const router = express.Router();
 const ContractKit = require('@celo/contractkit');
 const Web3 = require('web3');
 
+const ReservationNFT = require('../abis/ReservationNFT.json');
+
 require('dotenv').config();
 
 // GET /api/blockchain/connect
@@ -99,6 +101,42 @@ router.put('/transfer-celo', async (req, res, next) => {
 
         return res.status(200).json({
             'CELO_Transaction_receipt': celoReceipt
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
+// PUT /api/blockchain/gettotalsupply
+// Get total supply of NFT
+router.put('/gettotalsupply', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        client.addAccount(account.privateKey);
+
+        const networkId = await web3.eth.net.getId();
+
+        const deployedNetwork = ReservationNFT.networks[networkId];
+
+        if (!deployedNetwork) {
+            throw new Error(`${networkId} is not valid`);
+        }
+
+        let instance = new web3.eth.Contract(
+            ReservationNFT.abi,
+            deployedNetwork.address
+        );
+
+        const totalSupply = await instance.methods.totalSupply().call();
+
+        return res.status(200).json({
+            TotalSupply: totalSupply
         });
     } catch(err){
         console.error(err);
