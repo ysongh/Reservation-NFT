@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+
+import { Button, Text, Input } from 'react-native-elements';
 
 import axios from '../axios';
 
@@ -30,30 +32,35 @@ export default function LoginScreen({ navigation }) {
   }
 
   return (
-		<View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
 
-			<Text>Login Screen</Text>
-        <Text>Email</Text>
-        <TextInput
+      <Text h1 style={styles.title}>Login Screen</Text>
+      <View style={styles.inputContainer}>
+        <Input
           value={email}
           placeholder="Email"
+          autoFocus
+          type="email"
           autoCorrect={false}
           onChangeText={(text) => setEmail(text)}
           keyboardType="email-address"
           clearButtonMode="while-editing"
         />
-        <Text>Email</Text>
-        <TextInput
+        <Input
           value={password}
           placeholder="Password"
           autoCorrect={false}
           secureTextEntry
+          type="password"
           onChangeText={(text) => setPassword(text)}
           clearButtonMode="while-editing"
         />
-      <Button onPress={() => login()} title="Login" />
-      <Button onPress={() => register()} title="Register" />
-		</View>
+      </View>
+
+      <Button style={styles.button} onPress={() => login()} title="Login" />
+      <Button style={styles.button} onPress={() => register()} type="outline" title="Register" />
+      <View style={{ height: 50 }} />
+    </KeyboardAvoidingView>
   );
 }
 
@@ -63,5 +70,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 10
   },
+  title: {
+    marginBottom: 10
+  },
+  inputContainer: {
+    width: 300
+  },
+  button: {
+    width: 300,
+    marginTop: 20
+  }
 });
