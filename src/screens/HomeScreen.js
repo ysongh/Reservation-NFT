@@ -5,7 +5,7 @@ export default function HomeScreen({ navigation }) {
   return (
 		<View style={styles.container}>
 			<Text>Reservation-NFT</Text>
-			<Button onPress={() => navigation.navigate('List')} title="Get Started" />
+			<Button onPress={() => navigation.navigate('Login')} title="Get Started" />
 		</View>
   );
 }
