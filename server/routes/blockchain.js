@@ -107,6 +107,36 @@ router.put('/transfer-celo', async (req, res, next) => {
     }
 });
 
+// PUT /api/blockchain/transfer-celo
+// Transfer cUSD to other Celo account
+router.put('/transfer-cusd', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+        const recipientAddress = req.body.recipientAddress;
+        const amount = req.body.amount;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        client.addAccount(account.privateKey);
+
+        const stabletoken = await client.contracts.getStableToken();
+
+        const cUSDtx = await stabletoken.transfer(recipientAddress, amount).send({from: account.address, feeCurrency: stabletoken.address})
+            .catch((err) => { throw new Error(`Could not transfer cUSD: ${err}`) });
+
+        const cUSDReceipt = await cUSDtx.waitReceipt();
+
+        return res.status(200).json({
+            'cUSD_Transaction_receipt': cUSDReceipt
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 // PUT /api/blockchain/gettotalsupply
 // Get total supply of NFT
 router.put('/gettotalsupply', async (req, res, next) => {
