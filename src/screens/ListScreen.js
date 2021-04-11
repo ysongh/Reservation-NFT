@@ -1,10 +1,22 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Button, View } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function ListScreen() {
+export default function ListScreen({ navigation }) {
+  const logout = async () => {
+    try{
+      await AsyncStorage.removeItem('@storage_Key');
+      navigation.replace('Home');
+    }
+    catch(err){
+      console.error(err);
+    }
+  }
+
   return (
 		<View style={styles.container}>
 			<Text>List</Text>
+      <Button onPress={() => logout()} title="Logout" />
 		</View>
   );
 }

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { Button, Text, Input } from 'react-native-elements';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axios from '../axios';
 
@@ -18,9 +17,9 @@ export default function LoginScreen({ navigation }) {
       }
 
       const { data } = await axios.put('/user/login', userData);
-      console.log(data);
+      console.log(data.data);
 
-      const jsonValue = JSON.stringify(data);
+      const jsonValue = JSON.stringify(data.data);
       await AsyncStorage.setItem('@storage_Key', jsonValue);
       navigation.replace('List')
     }
@@ -37,8 +36,8 @@ export default function LoginScreen({ navigation }) {
       }
 
       const { data } = await axios.post('/user/register', userData);
-      console.log(data);
-      const jsonValue = JSON.stringify(data);
+      console.log(data.data);
+      const jsonValue = JSON.stringify(data.data);
       await AsyncStorage.setItem('@storage_Key', jsonValue);
       navigation.replace('List')
     }
