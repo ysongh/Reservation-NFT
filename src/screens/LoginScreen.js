@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Button, Text, Input } from 'react-native-elements';
 
@@ -10,25 +11,40 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState('');
 
   const login = async () => {
-    const userData = {
-      email,
-      password
-    }
+    try{
+      const userData = {
+        email,
+        password
+      }
 
-    const { data } = await axios.put('/user/login', userData);
-    console.log(data);
-    //navigation.replace('List')
+      const { data } = await axios.put('/user/login', userData);
+      console.log(data);
+
+      const jsonValue = JSON.stringify(data);
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+      navigation.replace('List')
+    }
+    catch(err){
+      console.error(err);
+    }
   }
 
   const register = async () => {
-    const userData = {
-      email,
-      password
-    }
+    try{
+      const userData = {
+        email,
+        password
+      }
 
-    const { data } = await axios.post('/user/register', userData);
-    console.log(data);
-    //navigation.replace('List')
+      const { data } = await axios.post('/user/register', userData);
+      console.log(data);
+      const jsonValue = JSON.stringify(data);
+      await AsyncStorage.setItem('@storage_Key', jsonValue);
+      navigation.replace('List')
+    }
+    catch(err){
+      console.error(err);
+    }
   }
 
   return (
