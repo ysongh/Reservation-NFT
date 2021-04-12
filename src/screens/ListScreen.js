@@ -14,10 +14,10 @@ export default function ListScreen({ navigation }) {
   }
 
   return (
-		<View style={styles.container}>
-			<Text>List</Text>
+    <View style={styles.container}>
+      <Text>List</Text>
       <Button onPress={() => logout()} title="Logout" />
-		</View>
+    </View>
   );
 }
 
