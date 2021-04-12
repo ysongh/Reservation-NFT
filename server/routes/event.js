@@ -40,4 +40,19 @@ router.post('/create-event', async (req, res) => {
     }
 });
 
+// GET /api/event/detail/:eventId
+// Find more detail about an event
+router.get('/detail/:eventId', async (req, res) => {
+    try{
+        const eventId = req.params.eventId;
+        const event = await Event.findById(eventId);
+
+        return res.status(200).json({
+            data: event
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 module.exports = router; 
