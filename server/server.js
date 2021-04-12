@@ -14,6 +14,7 @@ app.use(cors());
 app.get('/', (req, res) => res.send('Server Work'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/blockchain', require('./routes/blockchain'));
+app.use('/api/event', require('./routes/event'));
 
 const port = process.env.PORT || 1000;
 
