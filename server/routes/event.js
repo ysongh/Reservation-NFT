@@ -3,6 +3,21 @@ const router = express.Router();
 
 const Event = require('../models/Event');
 
+// GET /api/event/events
+// Find all events
+router.get('/events', async (req, res) => {
+    try{
+        const events = await Event.find();
+
+        return res.status(200).json({
+            data: events,
+            count: events.length
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 // POST /api/event/create-event
 // Create a new event
 router.post('/create-event', async (req, res) => {
