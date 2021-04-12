@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
+const ContractKit = require('@celo/contractkit');
+const Web3 = require('web3');
 
 const Event = require('../models/Event');
+const ReservationNFT = require('../abis/ReservationNFT.json');
 
 // GET /api/event/events
 // Find all events
@@ -49,6 +52,46 @@ router.get('/detail/:eventId', async (req, res) => {
 
         return res.status(200).json({
             data: event
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
+// POST /api/event/mintnft:eventId
+// Reserve an event and mint NFT
+router.post('/mintnft/:eventId', async (req, res, next) => {
+    try{
+        const privateKey = req.body.privateKey;
+        const eventId = req.params.eventId;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(privateKey);
+
+        client.addAccount(account.privateKey);
+
+        const networkId = await web3.eth.net.getId();
+
+        const deployedNetwork = ReservationNFT.networks[networkId];
+
+        if (!deployedNetwork) {
+            throw new Error(`${networkId} is not valid`);
+        }
+
+        let instance = new web3.eth.Contract(
+            ReservationNFT.abi,
+            deployedNetwork.address
+        );
+
+        const txObject = await instance.methods.mintNFT(eventId);
+        let tx = await client.sendTransactionObject(txObject, { from: account.address });
+
+        let receipt = await tx.waitReceipt();
+
+        return res.status(201).json({
+            data: receipt
         });
     } catch(err){
         console.error(err);
