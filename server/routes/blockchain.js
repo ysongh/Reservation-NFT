@@ -172,9 +172,13 @@ router.put('/getusertokens', async (req, res, next) => {
             
             if(tokenOwner === account.address){
                 let tokenURI = await instance.methods.tokenURI(i).call();
+                let nftData = await instance.methods.nft(i).call();
                 list.push({
                     tokenId: i,
-                    tokenURI: tokenURI
+                    tokenURI: tokenURI,
+                    name: nftData.name,
+                    date: nftData.date,
+                    payer: nftData.payer
                 });
             }
           }

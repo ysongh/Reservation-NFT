@@ -63,6 +63,7 @@ router.get('/detail/:eventId', async (req, res) => {
 router.post('/mintnft/:eventId', async (req, res, next) => {
     try{
         const privateKey = req.body.privateKey;
+        const name = req.body.name || "Guest";
         const eventId = req.params.eventId;
 
         const web3 = new Web3(process.env.REST_URL);
@@ -85,7 +86,7 @@ router.post('/mintnft/:eventId', async (req, res, next) => {
             deployedNetwork.address
         );
 
-        const txObject = await instance.methods.mintNFT(eventId);
+        const txObject = await instance.methods.mintNFT(eventId, name);
         let tx = await client.sendTransactionObject(txObject, { from: account.address });
 
         let receipt = await tx.waitReceipt();
