@@ -37,7 +37,7 @@ export default function ListScreen({ navigation }) {
     <View style={styles.container}>
       <Text style={styles.title} h2>Discover</Text>
       {events.map(event => (
-        <EventHorizontalCard event={event} key={event._id} />
+        <EventHorizontalCard event={event} key={event._id} navigation={navigation} />
       ))}
       <Button onPress={() => logout()} title="Logout" />
     </View>

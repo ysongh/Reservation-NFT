@@ -8,6 +8,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './screens/HomeScreen';
 import LoginScreen from './screens/LoginScreen';
 import ListScreen from './screens/ListScreen';
+import EventDetailScreen from './screens/EventDetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -18,6 +19,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="List" component={ListScreen} />
+        <Stack.Screen name="Event Detail" component={EventDetailScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

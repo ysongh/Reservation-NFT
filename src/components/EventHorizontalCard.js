@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Button, Text, Image } from 'react-native-elements';
 
-export default function EventHorizontalCard({ event }) {
+export default function EventHorizontalCard({ event, navigation }) {
   return (
     <View style={styles.container}>
       <Image
@@ -17,7 +17,7 @@ export default function EventHorizontalCard({ event }) {
         </View>
         <View style={styles.row}>
           <Text style={styles.date}>{event.date}</Text>
-          <Button style={styles.btn} title="View" />
+          <Button style={styles.btn} onPress={() => navigation.navigate('Event Detail', {eventId: event._id} )} title="View" />
         </View>
       </View>
     </View>
