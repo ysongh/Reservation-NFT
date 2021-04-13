@@ -72,7 +72,7 @@ export default function LoginScreen({ navigation }) {
         />
       </View>
 
-      <Button style={styles.button} onPress={() => login()} title="Login" />
+      <Button buttonStyle={{ backgroundColor: '#6643B5' }} style={styles.button} onPress={() => login()} title="Login" />
       <Button style={styles.button} onPress={() => register()} type="outline" title="Register" />
       <View style={{ height: 50 }} />
     </KeyboardAvoidingView>

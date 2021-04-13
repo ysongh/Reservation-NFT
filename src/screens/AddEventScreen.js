@@ -24,7 +24,7 @@ export default function AddEventScreen({ navigation }) {
         image,
         price,
         description,
-        email: jsonValue.email || null
+        email: JSON.parse(jsonValue).email || null
       }
 
       await axios.post('/event/create-event', eventData);

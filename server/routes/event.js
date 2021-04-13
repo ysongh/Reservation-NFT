@@ -58,7 +58,7 @@ router.get('/detail/:eventId', async (req, res) => {
     }
 });
 
-// POST /api/event/mintnft:eventId
+// POST /api/event/mintnft/:eventId
 // Reserve an event and mint NFT
 router.post('/mintnft/:eventId', async (req, res, next) => {
     try{

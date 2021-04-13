@@ -35,12 +35,13 @@ export default function ListScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
+      <Button onPress={() => navigation.navigate('Add Event')} title="Add Event" />
+      <Button onPress={() => navigation.navigate('Your NFT')} title="Your NFT" />
+      <Button onPress={() => logout()} title="Logout" />
       <Text style={styles.title} h2>Discover</Text>
       {events.map(event => (
         <EventHorizontalCard event={event} key={event._id} navigation={navigation} />
       ))}
-      <Button onPress={() => logout()} title="Logout" />
-      <Button onPress={() => navigation.navigate('Add Event')} title="Get Started" />
     </View>
   );
 }
