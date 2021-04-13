@@ -1,21 +1,22 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ActivityIndicator } from 'react-native';
 import { Button, Text, Image } from 'react-native-elements';
 
-export default function EventHorizontalCard() {
+export default function EventHorizontalCard({ event }) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: "" }}
+        source={{ uri: event.image }}
         style={{ width: 125, height: 125 }}
+        PlaceholderContent={<ActivityIndicator />}
       />
       <View style={styles.cardText}>
         <View style={styles.row}>
-          <Text style={styles.title} h3>Item Name</Text>
-          <Text style={styles.price}>$1.00</Text>
+          <Text style={styles.title} h4>{event.name}</Text>
+          <Text style={styles.price}>{event.price}</Text>
         </View>
         <View style={styles.row}>
-          <Text style={styles.date}>Dec 12, 2021 at 4:00pm</Text>
+          <Text style={styles.date}>{event.date}</Text>
           <Button style={styles.btn} title="View" />
         </View>
       </View>
