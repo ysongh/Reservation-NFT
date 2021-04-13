@@ -40,6 +40,7 @@ export default function ListScreen({ navigation }) {
         <EventHorizontalCard event={event} key={event._id} navigation={navigation} />
       ))}
       <Button onPress={() => logout()} title="Logout" />
+      <Button onPress={() => navigation.navigate('Add Event')} title="Get Started" />
     </View>
   );
 }
