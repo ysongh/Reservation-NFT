@@ -8,7 +8,6 @@ import axios from '../axios';
 export default function EventDetailScreen({ route, navigation }) {
   const { eventId } = route.params;
   const [event, setEvent] = useState({});
-  const [balance, setBalance] = useState(0);
 
   useEffect(() => {
     async function fetchEvent(){
@@ -21,34 +20,8 @@ export default function EventDetailScreen({ route, navigation }) {
       }
     }
 
-    const getBalance = async () => {
-      try{
-        const jsonValue = await AsyncStorage.getItem('@storage_Key');
-
-        const {data} = await axios.put('/blockchain/getbalance', {privateKey: JSON.parse(jsonValue).privateKey});
-        setBalance(data.CELO_balance);
-      }
-      catch(err){
-        console.error(err);
-      }
-    }
-
     fetchEvent();
-    getBalance();
   }, [eventId])
-
-  const reservseEvent = async () => {
-    try{
-      const jsonValue = await AsyncStorage.getItem('@storage_Key');
-
-      const res = await axios.post(`/event/mintnft/${eventId}`, {privateKey: JSON.parse(jsonValue).privateKey});
-      console.log(res);
-      navigation.replace('List');
-    }
-    catch(err){
-      console.error(err);
-    }
-  }
 
   return (
     <View style={styles.container}>
@@ -61,18 +34,13 @@ export default function EventDetailScreen({ route, navigation }) {
         <Text style={styles.title} h2>{event.name}</Text>
         <Text style={styles.p}>{event.location}</Text>
         <Text style={styles.p}>{event.date}</Text>
-
         <Text style={styles.detail}>{event.description}</Text>
-
-        <Text>{balance / 10**18} Celo</Text>
         <ButtonGroup
-          onPress={() => reservseEvent()}
+          onPress={() => navigation.navigate("Checkout", {event: event})}
           buttons={[`$ ${event.price || ""} `, 'Reserse']}
           containerStyle={{height: 50}}
         />
-        
       </View>
-      
     </View>
   );
 }

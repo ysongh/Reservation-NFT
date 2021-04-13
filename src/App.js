@@ -11,6 +11,7 @@ import ListScreen from './screens/ListScreen';
 import EventDetailScreen from './screens/EventDetailScreen';
 import AddEventScreen from './screens/AddEventScreen';
 import NFTScreen from './screens/NFTScreen';
+import CheckoutScreen from './screens/CheckoutScreen';
 
 const Stack = createStackNavigator();
 
@@ -24,6 +25,7 @@ export default function App() {
         <Stack.Screen name="Event Detail" component={EventDetailScreen} />
         <Stack.Screen name="Add Event" component={AddEventScreen} />
         <Stack.Screen name="Your NFT" component={NFTScreen} />
+        <Stack.Screen name="Checkout" component={CheckoutScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
