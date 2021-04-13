@@ -137,9 +137,9 @@ router.put('/transfer-cusd', async (req, res, next) => {
     }
 });
 
-// PUT /api/blockchain/gettotalsupply
-// Get total supply of NFT
-router.put('/gettotalsupply', async (req, res, next) => {
+// PUT /api/blockchain/getusertokens
+// Get total supply of NFT and user NFT
+router.put('/getusertokens', async (req, res, next) => {
     try{
         const privateKey = req.body.privateKey;
 
@@ -165,8 +165,23 @@ router.put('/gettotalsupply', async (req, res, next) => {
 
         const totalSupply = await instance.methods.totalSupply().call();
 
+        let list = []; 
+
+        for(let i = 1; i <= totalSupply; i++){
+            const tokenOwner = await instance.methods.ownerOf(i).call();
+            
+            if(tokenOwner === account.address){
+                let tokenURI = await instance.methods.tokenURI(i).call();
+                list.push({
+                    tokenId: i,
+                    tokenURI: tokenURI
+                });
+            }
+          }
+
         return res.status(200).json({
-            TotalSupply: totalSupply
+            TotalSupply: totalSupply,
+            data: list
         });
     } catch(err){
         console.error(err);
