@@ -58,6 +58,47 @@ router.get('/detail/:eventId', async (req, res) => {
     }
 });
 
+// GET /api/event/nft/:nftid
+// Find an event by NFT ID
+router.get('/nft/:nftid', async (req, res) => {
+    try{
+        const nftId = req.params.nftid;
+
+        const web3 = new Web3(process.env.REST_URL);
+        const client = ContractKit.newKitFromWeb3(web3);
+
+        const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
+
+        client.addAccount(account.privateKey);
+
+        const networkId = await web3.eth.net.getId();
+
+        const deployedNetwork = ReservationNFT.networks[networkId];
+
+        if (!deployedNetwork) {
+            throw new Error(`${networkId} is not valid`);
+        }
+
+        let instance = new web3.eth.Contract(
+            ReservationNFT.abi,
+            deployedNetwork.address
+        );
+
+        let tokenURI = await instance.methods.tokenURI(nftId).call();
+        let nftData = await instance.methods.nft(nftId).call();
+
+        const event = await Event.findById(tokenURI);
+
+        return res.status(200).json({
+            data: event,
+            name: nftData.name,
+            date: nftData.date,
+        });
+    } catch(err){
+        console.error(err);
+    }
+});
+
 // POST /api/event/mintnft/:eventId
 // Reserve an event and mint NFT
 router.post('/mintnft/:eventId', async (req, res, next) => {
