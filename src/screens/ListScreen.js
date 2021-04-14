@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import { Button, Text } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -34,7 +34,7 @@ export default function ListScreen({ navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Button onPress={() => navigation.navigate('Add Event')} title="Add Event" />
       <Button onPress={() => navigation.navigate('Your NFT')} title="Your NFT" />
       <Button onPress={() => logout()} title="Logout" />
@@ -42,7 +42,7 @@ export default function ListScreen({ navigation }) {
       {events.map(event => (
         <EventHorizontalCard event={event} key={event._id} navigation={navigation} />
       ))}
-    </View>
+    </ScrollView>
   );
 }
 

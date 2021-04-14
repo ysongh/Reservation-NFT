@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     color: '#807575',
     fontSize: 15,
-    fontWeight: 100
+    fontWeight: "100"
   },
 });

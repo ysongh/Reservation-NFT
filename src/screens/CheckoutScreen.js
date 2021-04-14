@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, KeyboardAvoidingView, View } from 'react-native';
 import { Input, Button, Text } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -46,7 +46,7 @@ export default function EventDetailScreen({ route, navigation }) {
   }
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Text style={styles.balanceLabel}>Current Balance</Text>
       <Text style={styles.balanceValue}>{balance / 10**18} Celo</Text>
 
@@ -77,13 +77,14 @@ export default function EventDetailScreen({ route, navigation }) {
       <View style={{marginVertical: 10}}></View>
 
       <Button buttonStyle={{ backgroundColor: '#6643B5' }} onPress={() => reservseEvent()} title="Pay" />
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
     padding: 15
   },
   balanceLabel: {

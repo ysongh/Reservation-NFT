@@ -26,7 +26,7 @@ export default function EventDetailScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: event.image }}
+        source={{ uri: event.image || "x" }}
         style={{ width: '100%', height: 300 }}
         PlaceholderContent={<ActivityIndicator />}
       />

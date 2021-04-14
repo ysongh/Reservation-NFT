@@ -6,7 +6,7 @@ export default function EventHorizontalCard({ event, navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: event.image }}
+        source={{ uri: event.image || "x" }}
         style={{ width: 125, height: 125 }}
         PlaceholderContent={<ActivityIndicator />}
       />
@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
     marginTop: 25
   },
   price: {
-    fontSize: 20,
-    display: 'block',
+    fontSize: 20
   },
   btn: {
     marginTop: 25
