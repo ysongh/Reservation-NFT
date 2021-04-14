@@ -13,6 +13,7 @@ import AddEventScreen from './screens/AddEventScreen';
 import NFTScreen from './screens/NFTScreen';
 import CheckoutScreen from './screens/CheckoutScreen';
 import QRcodeScreen from './screens/QRcodeScreen';
+import ScannerScreen from './screens/ScannerScreen';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ export default function App() {
         <Stack.Screen name="Your NFT" component={NFTScreen} />
         <Stack.Screen name="Checkout" component={CheckoutScreen} />
         <Stack.Screen name="QRcode" component={QRcodeScreen} />
+        <Stack.Screen name="Scanner" component={ScannerScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -37,6 +37,7 @@ export default function ListScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <Button onPress={() => navigation.navigate('Add Event')} title="Add Event" />
       <Button onPress={() => navigation.navigate('Your NFT')} title="Your NFT" />
+      <Button onPress={() => navigation.navigate('Scanner')} title="Scanner" />
       <Button onPress={() => logout()} title="Logout" />
       <Text style={styles.title} h2>Discover</Text>
       {events.map(event => (

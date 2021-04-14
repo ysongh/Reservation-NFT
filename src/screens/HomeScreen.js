@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const hero = require ('../images/hero.png');
+const hero = require('../images/hero.png');
 
 export default function HomeScreen({ navigation }) {
   useEffect(() => {
