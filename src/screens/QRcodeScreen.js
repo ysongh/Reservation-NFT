@@ -4,14 +4,14 @@ import { Button } from 'react-native-elements';
 import QRCode from 'react-native-qrcode-svg';
 
 export default function QRcodeScreen({ route, navigation }) {
-  const { tokenURI } = route.params;
+  const { tokenId } = route.params;
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your QR Code</Text>
       <Text style={styles.p}>Show this to the event host</Text>
       <QRCode
         size={225}
-        value={tokenURI}
+        value={tokenId.toString()}
       />
       <Button buttonStyle={styles.btn} onPress={() => navigation.navigate('Your NFT')} type="outline" title="Back" />
     </View>

@@ -7,7 +7,6 @@ const outline = require('../images/outline.png');
 
 export default function ScannerScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
-  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -16,9 +15,8 @@ export default function ScannerScreen({ navigation }) {
     })();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
-    setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+  const handleBarCodeScanned = ({ data }) => {
+    navigation.navigate('Scan Result', {nftId: data});
   };
 
   if (hasPermission === null) {
@@ -30,7 +28,7 @@ export default function ScannerScreen({ navigation }) {
 
   return (
     <BarCodeScanner
-      onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+      onBarCodeScanned={handleBarCodeScanned}
       style={[StyleSheet.absoluteFill, styles.container]}>
         <Text style={styles.title}>Scan QR Code</Text>
         <Text style={styles.p}>To confirm they pay for the event</Text>

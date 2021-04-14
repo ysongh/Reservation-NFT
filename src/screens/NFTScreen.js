@@ -30,7 +30,7 @@ export default function NFTScreen({ navigation }) {
       <Text style={styles.title} h2>NFT</Text>
       {
         nfts.map((token) => (
-          <ListItem key={token.tokenId} bottomDivider  onPress={() => navigation.navigate("QRcode", {tokenURI: token.tokenURI})}>
+          <ListItem key={token.tokenId} bottomDivider  onPress={() => navigation.navigate("QRcode", {tokenId: token.tokenId})}>
             <ListItem.Content>
               <ListItem.Title>Token Id: {token.tokenId}</ListItem.Title>
               <ListItem.Subtitle>Token URI: {token.tokenURI}</ListItem.Subtitle>
