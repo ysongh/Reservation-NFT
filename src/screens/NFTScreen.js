@@ -4,7 +4,6 @@ import { Text, ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axios from '../axios';
-import EventHorizontalCard from '../components/EventHorizontalCard';
 
 export default function NFTScreen({ navigation }) {
   const [nfts, setNFTs] = useState([]);
@@ -31,7 +30,7 @@ export default function NFTScreen({ navigation }) {
       <Text style={styles.title} h2>NFT</Text>
       {
         nfts.map((token) => (
-          <ListItem key={token.tokenId} bottomDivider>
+          <ListItem key={token.tokenId} bottomDivider  onPress={() => navigation.navigate("QRcode", {tokenURI: token.tokenURI})}>
             <ListItem.Content>
               <ListItem.Title>Token Id: {token.tokenId}</ListItem.Title>
               <ListItem.Subtitle>Token URI: {token.tokenURI}</ListItem.Subtitle>
