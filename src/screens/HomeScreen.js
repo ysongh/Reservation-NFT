@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { StyleSheet, View, Text, Image } from 'react-native';
 import { Button } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const hero = require('../images/hero.png');
+import { GlobalContext } from '../context/GlobalState';
 
 export default function HomeScreen({ navigation }) {
+  const { setNavigation } = useContext(GlobalContext);
+  
   useEffect(() => {
     async function checkToken(){
       try{
         const jsonValue = await AsyncStorage.getItem('@storage_Key')
         console.log(jsonValue != null ? JSON.parse(jsonValue) : null);
 
-        if(jsonValue) navigation.replace('List');
+        if(jsonValue){
+          setNavigation(navigation);
+          navigation.replace('List');
+        }
       }
       catch(err){
         console.error(err);

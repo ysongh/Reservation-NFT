@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import { Button, Text } from 'react-native-elements';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axios from '../axios';
 import EventHorizontalCard from '../components/EventHorizontalCard';
@@ -23,22 +22,8 @@ export default function ListScreen({ navigation }) {
     fetchEvents();
   }, [])
 
-  const logout = async () => {
-    try{
-      await AsyncStorage.removeItem('@storage_Key');
-      navigation.replace('Home');
-    }
-    catch(err){
-      console.error(err);
-    }
-  }
-
   return (
     <ScrollView style={styles.container}>
-      <Button onPress={() => navigation.navigate('Add Event')} title="Add Event" />
-      <Button onPress={() => navigation.navigate('Your NFT')} title="Your NFT" />
-      <Button onPress={() => navigation.navigate('Scanner')} title="Scanner" />
-      <Button onPress={() => logout()} title="Logout" />
       <Text style={styles.title} h2>Discover</Text>
       {events.map(event => (
         <EventHorizontalCard event={event} key={event._id} navigation={navigation} />

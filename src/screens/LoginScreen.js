@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import { Button, Text, Input } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axios from '../axios';
+import { GlobalContext } from '../context/GlobalState';
 
 export default function LoginScreen({ navigation }) {
+  const { setNavigation } = useContext(GlobalContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -21,7 +23,8 @@ export default function LoginScreen({ navigation }) {
 
       const jsonValue = JSON.stringify(data.data);
       await AsyncStorage.setItem('@storage_Key', jsonValue);
-      navigation.replace('List')
+      setNavigation(navigation);
+      navigation.replace('List');
     }
     catch(err){
       console.error(err);
@@ -39,6 +42,7 @@ export default function LoginScreen({ navigation }) {
       console.log(data.data);
       const jsonValue = JSON.stringify(data.data);
       await AsyncStorage.setItem('@storage_Key', jsonValue);
+      setNavigation(navigation);
       navigation.replace('List')
     }
     catch(err){
