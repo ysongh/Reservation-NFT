@@ -3,6 +3,7 @@ An app where people can reserve a spot at the event and earn NFT which is used a
 
 - Demo - https://youtu.be/pLlFuPBic_Y
 - Design - https://www.figma.com/file/qcb7tKORA1WrNlFTm6UJ4P/reservation-nft?node-id=0%3A1
+- Try the app with Expo Go - https://expo.io/@ysongh/projects/reservation-nft
 
 ## Features
 - Event host can create an event

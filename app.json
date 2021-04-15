@@ -7,6 +7,7 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "description": "An app where people can reserve a spot at the event and earn NFT which is used as proof of reservation for the event"
   }
 }
