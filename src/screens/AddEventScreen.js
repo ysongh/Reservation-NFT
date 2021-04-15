@@ -11,7 +11,7 @@ import { pinataApiKey, pinataSecretApiKey } from '../config';
 export default function AddEventScreen({ navigation }) {
   const [name, setName] = useState('');
   const [location, setLocation] = useState('');
-  const [date, setDate] = useState(new Date(1598051730000));
+  const [date, setDate] = useState(new Date(1618051730000));
   const [show, setShow] = useState(false);
   const [image, setImage] = useState('');
   const [price, setPrice] = useState(0);
@@ -128,15 +128,16 @@ export default function AddEventScreen({ navigation }) {
           />
 
           <Text style={styles.dateLabel}>Date</Text>
-          <Button buttonStyle={styles.dateValue} onPress={showDatepicker} title={JSON.stringify(date).slice(1, 11)} />
-          {show && (<DateTimePicker
+          {/* <Button buttonStyle={styles.dateValue} onPress={showDatepicker} title={JSON.stringify(date).slice(1, 11)} /> */}
+          <DateTimePicker
+            style={{ marginBottom: 10}}
             testID="dateTimePicker"
             value={date}
             mode="date"
             is24Hour={true}
             display="default"
             onChange={onChangeTime}
-          /> )}
+          />
 
           <Text style={styles.dateLabel}>Image</Text>
           <Button buttonStyle={styles.dateValue} title="Select an image" onPress={pickImage} />

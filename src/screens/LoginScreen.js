@@ -63,6 +63,7 @@ export default function LoginScreen({ navigation }) {
           autoCorrect={false}
           onChangeText={(text) => setEmail(text)}
           keyboardType="email-address"
+          autoCapitalize="none"
           clearButtonMode="while-editing"
         />
         <Input
