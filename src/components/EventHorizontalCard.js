@@ -17,7 +17,7 @@ export default function EventHorizontalCard({ event, navigation }) {
         </View>
         <View style={styles.row}>
           <Text style={styles.date}>{event.date}</Text>
-          <Button style={styles.btn} onPress={() => navigation.navigate('Event Detail', {eventId: event._id} )} title="View" />
+          <Button buttonStyle={styles.btn} onPress={() => navigation.navigate('Event Detail', {eventId: event._id} )} title="View" />
         </View>
       </View>
     </View>
@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   btn: {
-    marginTop: 25
+    marginTop: 25,
+    backgroundColor: '#6643B5'
   }
 });

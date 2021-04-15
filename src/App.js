@@ -22,11 +22,17 @@ import Footer from './components/Footer';
 const Stack = createStackNavigator();
 
 export default function App() {
+  const headerOptions = {
+    headerStyle: { backgroundColor: "#6643B5"},
+    headerTitleStyle: { color: "white"},
+    headerTintColor: "white",
+  }
+  
   return (
     <GlobalProvider>
       <View style={styles.container}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={headerOptions}>
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="List" component={ListScreen} />

@@ -24,32 +24,36 @@ export default function Footer() {
         <Icon
           name="add"
           size={25}
+          color="white"
         />
-        <Text style={styles.btn}>Add Event</Text>
+        <Text style={styles.label}>Add Event</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.footerIcon}  onPress={() => navigation.navigate('Your NFT')}>
         <Icon
           name="book"
           size={25}
+          color="white"
         />
-        <Text style={styles.btn}>Your NFT</Text>
+        <Text style={styles.label}>Your NFT</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.footerIcon} onPress={() => navigation.navigate('Scanner')}>
         <Icon
           name="camera"
           size={25}
+          color="white"
         />
-        <Text style={styles.btn}>Scanner</Text>
+        <Text style={styles.label}>Scanner</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.footerIcon} onPress={() => logout()}>
         <Icon
           name="arrow-right"
           size={25}
+          color="white"
         />
-        <Text style={styles.btn}>Logout</Text>
+        <Text style={styles.label}>Logout</Text>
       </TouchableOpacity>
     </View>
   ) : null;
@@ -59,11 +63,12 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
+    backgroundColor: '#2794EB'
   },
   footerIcon: {
     padding: 7
   },
-  btn: {
-    flexDirection: 'row'
+  label: {
+    color: 'white'
   }
 });
