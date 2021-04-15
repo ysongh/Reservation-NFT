@@ -20,13 +20,13 @@ export default function Footer() {
   }
   return navigation ? (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.footerIcon} onPress={() => navigation.navigate('Add Event')}>
+      <TouchableOpacity style={styles.footerIcon} onPress={() => navigation.navigate('List')}>
         <Icon
-          name="add"
+          name="list"
           size={25}
           color="white"
         />
-        <Text style={styles.label}>Add Event</Text>
+        <Text style={styles.label}>List</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.footerIcon}  onPress={() => navigation.navigate('Your NFT')}>
@@ -36,6 +36,15 @@ export default function Footer() {
           color="white"
         />
         <Text style={styles.label}>Your NFT</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.footerIcon} onPress={() => navigation.navigate('Add Event')}>
+        <Icon
+          name="add"
+          size={25}
+          color="white"
+        />
+        <Text style={styles.label}>Add Event</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.footerIcon} onPress={() => navigation.navigate('Scanner')}>

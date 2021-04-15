@@ -13,7 +13,7 @@ export default function EventHorizontalCard({ event, navigation }) {
       <View style={styles.cardText}>
         <View style={styles.row}>
           <Text style={styles.title} h4>{event.name}</Text>
-          <Text style={styles.price}>{event.price}</Text>
+          <Text style={styles.price}>${event.price}</Text>
         </View>
         <View style={styles.row}>
           <Text style={styles.date}>{event.date}</Text>

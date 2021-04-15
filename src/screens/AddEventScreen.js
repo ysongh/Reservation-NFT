@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
-import { Button, Text, Input } from 'react-native-elements';
+import { Button, Text, Input, Card } from 'react-native-elements';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import axios from '../axios';
@@ -37,48 +37,51 @@ export default function AddEventScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
-
       <Text h1 style={styles.title}>Add Event</Text>
-      <View style={styles.inputContainer}>
-        <Input
-          value={name}
-          placeholder="Name"
-          autoCorrect
-          onChangeText={(text) => setName(text)}
-          clearButtonMode="while-editing"
-        />
-        <Input
-          value={location}
-          placeholder="Location"
-          onChangeText={(text) => setLocation(text)}
-          clearButtonMode="while-editing"
-        />
-        <Input
-          value={date}
-          type="date"
-          placeholder="Date"
-          onChangeText={(text) => setDate(text)}
-        />
-        <Input
-          value={image}
-          placeholder="Image URL"
-          onChangeText={(text) => setImage(text)}
-        />
-        <Input
-          value={price}
-          type="Number"
-          onChangeText={(text) => setPrice(text)}
-        />
-        <Input
-          value={description}
-          placeholder="Description"
-          onChangeText={(text) => setDescription(text)}
-          clearButtonMode="while-editing"
-        />
-      </View>
+      <Card>
+        <View style={styles.inputContainer}>
+          <Input
+            value={name}
+            placeholder="Name"
+            autoCorrect
+            onChangeText={(text) => setName(text)}
+            clearButtonMode="while-editing"
+          />
+          <Input
+            value={location}
+            placeholder="Location"
+            onChangeText={(text) => setLocation(text)}
+            clearButtonMode="while-editing"
+          />
+          <Input
+            value={date}
+            type="date"
+            placeholder="Date"
+            onChangeText={(text) => setDate(text)}
+          />
+          <Input
+            value={image}
+            placeholder="Image URL"
+            onChangeText={(text) => setImage(text)}
+          />
+          <Input
+            value={price}
+            type="Number"
+            onChangeText={(text) => setPrice(text)}
+          />
+          <Input
+            value={description}
+            placeholder="Description"
+            onChangeText={(text) => setDescription(text)}
+            clearButtonMode="while-editing"
+          />
+          
+          <Button style={styles.button} onPress={() => createEvent()} title="Create" />
+          <Button style={styles.button} onPress={() => navigation.navigate('List')} type="outline" title="Cancel" />
+        </View>
+      </Card>
 
-      <Button style={styles.button} onPress={() => createEvent()} title="Create" />
-      <Button style={styles.button} onPress={() => navigation.navigate('List')} type="outline" title="Cancel" />
+      
       <View style={{ height: 50 }} />
     </KeyboardAvoidingView>
   );
