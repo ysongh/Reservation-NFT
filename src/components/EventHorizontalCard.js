@@ -6,7 +6,7 @@ export default function EventHorizontalCard({ event, navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: event.image || "x" }}
+        source={{ uri: "https://gateway.pinata.cloud/ipfs/" + event.image || "x" }}
         style={{ width: 125, height: 125 }}
         PlaceholderContent={<ActivityIndicator />}
       />

@@ -26,7 +26,7 @@ export default function EventDetailScreen({ route, navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: event.image || "x" }}
+        source={{ uri: "https://gateway.pinata.cloud/ipfs/" + event.image || "x" }}
         style={{ width: '100%', height: 300 }}
         PlaceholderContent={<ActivityIndicator />}
       />

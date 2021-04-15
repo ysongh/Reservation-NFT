@@ -30,7 +30,7 @@ export default function ScanResultScreen({ route, navigation }) {
     <View style={styles.container}>
       <Text style={styles.title} h2>Summary</Text>
       <Card>
-        <Card.Image source={{ uri: event.image || "x" }}>
+        <Card.Image source={{ uri: "https://gateway.pinata.cloud/ipfs/" + event.image || "x" }}>
           <Text style={{marginBottom: 10}}>
             {nftId}
           </Text>
