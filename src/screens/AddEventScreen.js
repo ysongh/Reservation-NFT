@@ -128,8 +128,8 @@ export default function AddEventScreen({ navigation }) {
           />
 
           <Text style={styles.dateLabel}>Date</Text>
-          {/* <Button buttonStyle={styles.dateValue} onPress={showDatepicker} title={JSON.stringify(date).slice(1, 11)} /> */}
-          <DateTimePicker
+          <Button buttonStyle={styles.dateValue} onPress={showDatepicker} title={JSON.stringify(date).slice(1, 11)} />
+          {show && <DateTimePicker
             style={{ marginBottom: 10}}
             testID="dateTimePicker"
             value={date}
@@ -137,7 +137,7 @@ export default function AddEventScreen({ navigation }) {
             is24Hour={true}
             display="default"
             onChange={onChangeTime}
-          />
+          /> }
 
           <Text style={styles.dateLabel}>Image</Text>
           <Button buttonStyle={styles.dateValue} title="Select an image" onPress={pickImage} />

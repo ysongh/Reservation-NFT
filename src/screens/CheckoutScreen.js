@@ -20,7 +20,7 @@ export default function EventDetailScreen({ route, navigation }) {
         const jsonValue = await AsyncStorage.getItem('@storage_Key');
 
         const {data} = await axios.put('/blockchain/getbalance', {privateKey: JSON.parse(jsonValue).privateKey});
-        setBalance(data.CELO_balance);
+        setBalance(data.cUSD_balance);
         setUserData(JSON.parse(jsonValue));
       }
       catch(err){
@@ -42,6 +42,8 @@ export default function EventDetailScreen({ route, navigation }) {
       }
 
       const { data } = await axios.post(`/event/mintnft/${event._id}`, userData);
+      setBalance(+balance - (+event.price * 10**18));
+      console.log(balance, event.price)
       setTransactionHash(data.data.transactionHash);
       setShowResult(true);
       setLoading(false);
@@ -55,7 +57,7 @@ export default function EventDetailScreen({ route, navigation }) {
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Text style={styles.balanceLabel}>Current Balance</Text>
-      <Text style={styles.balanceValue}>{balance / 10**18} Celo</Text>
+      <Text style={styles.balanceValue}>{balance / 10**18} cUSD</Text>
 
       <View style={styles.eventDetail}>
         <Text style={styles.title} h3>{event.name}</Text>
@@ -69,7 +71,7 @@ export default function EventDetailScreen({ route, navigation }) {
       <View style={{marginVertical: 10}}></View>
 
       <Text style={styles.balanceLabel}>Price</Text>
-      <Text style={styles.balanceValue}>{event.price} Celo</Text>
+      <Text style={styles.balanceValue}>{event.price} cUSD</Text>
       
       <View style={{marginVertical: 10}}></View>
 
